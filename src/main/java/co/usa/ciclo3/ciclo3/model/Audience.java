@@ -6,53 +6,24 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+
+/*
+Autor: Camilo Morales
+*/
+
+//Creación de la Entidad
 @Entity
 @Table(name="audience")
+//Creación De la clase Audience en model
 public class Audience implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-    private Integer id;
+    //Generación de atributos necesarios del auditorio
     private String name;
     private String owner;
     private String description;
     private Integer capacity;
-    @ManyToOne
-    @JoinColumn(name="idcategory")
-    @JsonIgnoreProperties("audiences")
-    private Category category;
-
-    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "audience")
-    @JsonIgnoreProperties({"audiences", "client"})
-    private List<Message> messages;
-
-    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "audience")
-    @JsonIgnoreProperties({"audiences", "client"})
-    private List<Reservations> reservations;
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
-
-    public List<Reservations> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(List<Reservations> reservations) {
-        this.reservations = reservations;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -94,5 +65,52 @@ public class Audience implements Serializable {
         this.category = category;
     }
 
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
+    public List<Reservations> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservations> reservations) {
+        this.reservations = reservations;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
+    
+   
+    @ManyToOne
+    @JoinColumn(name="idcategory")
+    @JsonIgnoreProperties("audiences")
+    private Category category;
+    // Relación uno a muchos con Mensajes
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "audience")
+    @JsonIgnoreProperties({"audiences", "client"})
+    private List<Message> messages;
+    // Relación uno a muchos con Reservaciones
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "audience")
+    @JsonIgnoreProperties({"audiences", "client"})
+    private List<Reservations> reservations;
+
+    private Integer id;
+
+    
+
+    // Relación uno a muchos con Categoria
+
+    // Métodos Getter and Setter de la clase Audience
+    
    
 }
