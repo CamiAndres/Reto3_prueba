@@ -20,10 +20,10 @@ public class Audience implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     //Generación de atributos necesarios del auditorio
-    private String name;
-    private String owner;
-    private Integer capacity;
-    private String description;
+     private String name;
+     private String owner;
+     private Integer capacity;
+     private String description;
 
     public String getName() {
         return name;
@@ -88,10 +88,8 @@ public class Audience implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-    
 
-    
-    
+ 
    
     @ManyToOne
     @JoinColumn(name="idcategory")
